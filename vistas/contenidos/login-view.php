@@ -18,3 +18,13 @@
 		</div>
 	</form>
 </div>
+
+<?php
+
+	if(isset($_POST['usuario']) && isset($_POST['clave'])){
+		require_once "./controladores/loginControlador.php";
+		$login = new loginControlador();
+		echo $login->iniciar_sesion_controlador();
+	}
+
+?>

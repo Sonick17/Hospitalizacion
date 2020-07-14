@@ -32,11 +32,12 @@
 
         protected function agregar_auditoria_modelo($datos) 
         {
-            $sql = mainModel::conectar()->prepare("INSERT INTO usuario (numIdentidad,nombreCompleto,cuentaUsuario,cuentaClave,genero,idrol,email,telefono,direccion,foto,estado) VALUES(:numiden,:nomCompleto,:usuario,:clave,:genero,:rol,:email,:telefono,:direccion,:foto,:estado)");
-            $sql->bindParam(":Modulo",$datos['Modulo']);
+            $sql = mainModel::conectar()->prepare("INSERT INTO auditoria(modulo,codUsuario,fecha,accion,codOperacion) VALUES(:modulo,:codUsu,:fecha,:accion,:codOpe)");
+            $sql->bindParam(":modulo",$datos['modulo']);
             $sql->bindParam(":codUsu",$datos['codUsu']);
-            $sql->bindParam(":Fecha",$datos['Fecha']);
+            $sql->bindParam(":fecha",$datos['fecha']);
             $sql->bindParam(":accion",$datos['accion']);
+            $sql->bindParam(":codOpe",$datos['codOpe']);
             $sql->execute();
 
             return $sql;

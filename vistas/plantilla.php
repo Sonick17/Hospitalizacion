@@ -25,7 +25,7 @@
 			else
 				require_once "./vistas/contenidos/404-view.php";
 		else:
-			session_start();
+			session_start(['name'=>'SHP']);
 	?>
 		<!-- SideBar -->
 		<?php require_once "./vistas/modulos/navlateral.php"; ?>
