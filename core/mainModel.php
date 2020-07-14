@@ -30,6 +30,18 @@
             return $sql;
         }
 
+        protected function agregar_auditoria_modelo($datos) 
+        {
+            $sql = mainModel::conectar()->prepare("INSERT INTO usuario (numIdentidad,nombreCompleto,cuentaUsuario,cuentaClave,genero,idrol,email,telefono,direccion,foto,estado) VALUES(:numiden,:nomCompleto,:usuario,:clave,:genero,:rol,:email,:telefono,:direccion,:foto,:estado)");
+            $sql->bindParam(":Modulo",$datos['Modulo']);
+            $sql->bindParam(":codUsu",$datos['codUsu']);
+            $sql->bindParam(":Fecha",$datos['Fecha']);
+            $sql->bindParam(":accion",$datos['accion']);
+            $sql->execute();
+
+            return $sql;
+        }
+
         public function encryption($string)
         {
             $output = false;

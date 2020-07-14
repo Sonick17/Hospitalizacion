@@ -5,7 +5,7 @@
     else 
         require_once "./modelos/administradorModelo.php";
 
-    class administradorControlador extends mainModel {
+    class administradorControlador extends administradorModelo {
 
         public function agregar_usuario_controlador()
         {
@@ -77,22 +77,19 @@
                                 "numiden"=>$dni,
                                 "nomCompleto"=>$nombre.' '.$apellido,
                                 "usuario"=>$usuario,
-                                "clave"=>$pass1,
+                                "clave"=>$clave,
                                 "genero"=>$genero,
                                 "rol"=>$privilegio,
                                 "email"=>$email,
                                 "telefono"=>$telefono,
                                 "direccion"=>$direccion,
                                 "foto"=>$foto,
-                                "estado"=>1
+                                "estado"=>0
                             ];
-
-
-                            echo $dataAC;
-
+                            
                             $guardarCuenta = administradorModelo::agregar_cuenta_modelo($dataAC);
 
-                            if($guardarCuenta->rowCount() > 1){
+                            if($guardarCuenta->rowCount() >= 1){
                                 $alerta= [
                                     "Alerta"=>"limpiar",
                                     "Titulo"=>"Cuenta Registrada",
