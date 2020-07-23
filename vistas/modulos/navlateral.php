@@ -8,8 +8,8 @@
 		<!-- SideBar User info -->
 		<div class="full-box dashboard-sideBar-UserInfo">
 			<figure class="full-box">
-				<img src="<?php echo SERVERURL; ?>vistas/assets/avatars/Male1Avatar.png" alt="UserIcon">
-				<figcaption class="text-center text-titles">User name</figcaption>
+				<img src="<?php echo SERVERURL; ?>vistas/assets/avatars/<?php echo $_SESSION['foto_shp']; ?> " alt="UserIcon">
+				<figcaption class="text-center text-titles"><?php echo $_SESSION['nombres_shp']; ?> </figcaption>
 			</figure>
 			<ul class="full-box list-unstyled text-center">
 				<li>
@@ -23,7 +23,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" title="Salir del sistema" class="btn-exit-system">
+					<a href="<?php echo $lc->encryption($_SESSION['token_shp']); ?>" title="Salir del sistema" class="btn-exit-system">
 						<i class="zmdi zmdi-power"></i>
 					</a>
 				</li>

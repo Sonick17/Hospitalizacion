@@ -6,6 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/main.css">
+
+	<!--===== Scripts -->
+	<?php require_once "./vistas/modulos/script.php"; ?>
 </head>
 <body>
 
@@ -26,6 +29,14 @@
 				require_once "./vistas/contenidos/404-view.php";
 		else:
 			session_start(['name'=>'SHP']);
+
+			require_once "./controladores/loginControlador.php";
+			$lc = new loginControlador();
+
+			if( !isset($_SESSION['token_shp']) || !isset($_SESSION['usuario_shp']) )
+				$lc->forzar_cierre_session_controlador();
+
+			
 	?>
 		<!-- SideBar -->
 		<?php require_once "./vistas/modulos/navlateral.php"; ?>
@@ -41,10 +52,14 @@
 
 		</section>
 
-	<?php endif; ?>
-
-	<!--===== Scripts -->
-	<?php require_once "./vistas/modulos/script.php"; ?>
+	<?php 
+			require_once "./vistas/modulos/logoutScript.php";
+		endif;
+	?>
+	
+	<script>
+		$.material.init();
+	</script>
 
 </body>
 </html>
