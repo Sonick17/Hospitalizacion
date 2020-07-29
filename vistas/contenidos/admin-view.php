@@ -139,13 +139,13 @@
 		    				<div class="col-xs-12 col-sm-6">
 								<div class="radio radio-primary">
 									<label>
-										<input type="radio" name="optionsPrivilegio" id="optionsRadios1" value="1">
+										<input type="radio" name="optionsPrivilegio" id="optionsRadios1" value="'.<?php echo $lc->encryption(1) ?>.'">
 										<i class="zmdi zmdi-star"></i> &nbsp; Nivel 1
 									</label>
 								</div>
 								<div class="radio radio-primary">
 									<label>
-										<input type="radio" name="optionsPrivilegio" id="optionsRadios2" value="2">
+										<input type="radio" name="optionsPrivilegio" id="optionsRadios2" value="'.<?php echo $lc->encryption(2) ?>.'">
 										<i class="zmdi zmdi-star"></i> &nbsp; Nivel 2
 									</label>
 								</div>

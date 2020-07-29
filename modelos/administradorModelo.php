@@ -25,6 +25,15 @@
             return $sql;
         }
 
+
+        protected function eliminar_cuenta_modelo($codigo)
+        {
+            $query = mainModel::conectar()->prepare("UPDATE usuario SET estado = 1 WHERE codUsuario = :codUsuario");
+            $query->bindParam(":codUsuario",$codigo);
+            $query->execute();
+
+            return $query;
+        }
         
 
     }
