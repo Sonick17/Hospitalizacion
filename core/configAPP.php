@@ -1,9 +1,14 @@
 <?php 
 
-    const SERVER  = "localhost";
-    const BD = "hospitalizacion";
-    const USER = "root";
-    const PASS = "";
+    // const SERVER  = "localhost";
+    // const BD = "hospitalizacion";
+    // const USER = "root";
+    // const PASS = "";
+
+    const SERVER  = "bldl3zhridayixjilknt-mysql.services.clever-cloud.com";
+    const BD = "bldl3zhridayixjilknt";
+    const USER = "u9f35676yeoxltat";
+    const PASS = "GTCK6aakGJ0aI7HgjcM4";
 
     const SGBD = "mysql:host=". SERVER . "; dbname=". BD;
 
