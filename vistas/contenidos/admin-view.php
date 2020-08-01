@@ -1,3 +1,10 @@
+<?php
+	if($_SESSION['tipo_shp'] != 1 )
+	{
+		echo $lc->forzar_cierre_session_controlador();
+	}
+?>
+
 <div class="container-fluid">
 	<div class="page-header">
 	  <h1 class="text-titles"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Usuarios <small></small></h1>

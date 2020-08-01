@@ -2,17 +2,43 @@
 	<div class="page-header">
 	  <h1 class="text-titles"><i class="zmdi zmdi-account-circle zmdi-hc-fw"></i> MIS DATOS</small></h1>
 	</div>
-	<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+	<!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p> -->
 </div>
 
 <!-- Panel mis datos -->
+
+
 <div class="container-fluid">
+
+	<!-- <?php
+		$datos = explode("/", $_GET['views']);
+
+		if($datos[1]=="admin"):
+			
+			if($_SESSION['tipo_shp'] != 1 )
+			{
+				echo $lc->forzar_cierre_session_controlador();
+			}
+
+			
+
+		elseif($datos[1]=="user"):
+			echo "user";
+		else:
+
+		
+	?> -->
+	<h4>Lo sentimos</h4>
+	<p>No podemos mostrar la informacion</p>
+	<?php endif; ?>
+
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h3 class="panel-title"><i class="zmdi zmdi-refresh"></i> &nbsp; MIS DATOS</h3>
 		</div>
 		<div class="panel-body">
-			<form>
+			<form data-form="update" action="<?php echo SERVERURL; ?>ajax/administradorAjax.php" method="POST" class="FormularioAjax" 
+			autocomplete= "off" enctype= "multipart/form-data">
 		    	<fieldset>
 		    		<legend><i class="zmdi zmdi-account-box"></i> &nbsp; Información personal</legend>
 		    		<div class="container-fluid">

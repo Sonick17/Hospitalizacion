@@ -40,7 +40,7 @@
 		
 			<?php 
 				$pagina = explode("/",$_GET['views']);
-				echo $insAdmin->paginador_administrador_controlador($pagina[1],5, $_SESSION['tipo_shp'],$_SESSION['codusuario_shp'] );
+				echo $insAdmin->paginador_administrador_controlador($pagina[1],1, $_SESSION['tipo_shp'],$_SESSION['codusuario_shp'],"" );
 			?>		
 			
 		</div>

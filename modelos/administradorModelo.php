@@ -25,7 +25,6 @@
             return $sql;
         }
 
-
         protected function eliminar_cuenta_modelo($codigo)
         {
             $query = mainModel::conectar()->prepare("UPDATE usuario SET estado = 1 WHERE codUsuario = :codUsuario");
@@ -35,5 +34,19 @@
             return $query;
         }
         
+
+        protected function datos_admininstrador_modelo($tipo, $codigo)
+        {
+            if($tipo == "Unico"){
+                $query = mainModel::conectar()->prepare("SELECT * FROM usuario WHERE codUsuario = :Codigo");
+                $query->binParam(":Codigo",$codigo);
+            }elseif($tipo == "Conteo"){
+                $query = mainModel::conectar()->prepare("SELECT codUsuario FROM usuario");
+                // $query->binParam(":Codigo",$codigo);
+            }
+
+            $query->execute();
+            return $query;
+        }
 
     }

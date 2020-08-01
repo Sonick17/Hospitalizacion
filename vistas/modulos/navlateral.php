@@ -11,14 +11,24 @@
 				<img src="<?php echo SERVERURL; ?>vistas/assets/avatars/<?php echo $_SESSION['foto_shp']; ?> " alt="UserIcon">
 				<figcaption class="text-center text-titles"><?php echo $_SESSION['nombres_shp']; ?> </figcaption>
 			</figure>
+
+			<?php
+				if($_SESSION['tipo_shp'] == 1){
+					$tipo = "admin";
+				}else{
+					$tipo = "user";
+				}
+			?>
+
+
 			<ul class="full-box list-unstyled text-center">
 				<li>
-					<a href="<?php echo SERVERURL; ?>mydata//" title="Mis datos">
+					<a href="<?php echo SERVERURL; ?>mydata/<?php echo $tipo; ?>/<?php echo $lc->encryption($_SESSION['codusuario_shp']);?>/" title="Mis datos">
 						<i class="zmdi zmdi-account-circle"></i>
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo SERVERURL; ?>myaccount/" title="Mi cuenta">
+					<a href="<?php echo SERVERURL; ?>myaccount/<?php echo $tipo; ?>/<?php echo $lc->encryption($_SESSION['codusuario_shp']);?>/" title="Mi cuenta">
 						<i class="zmdi zmdi-settings"></i>
 					</a>
 				</li>
@@ -36,7 +46,13 @@
 					<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
 				</a>
 			</li>
+
 			<li>
+				<a href="<?php echo SERVERURL; ?>newpatient/">
+					<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Nuevo Ingreso </i>
+				</a>				
+			</li>
+			<!-- <li>
 				<a href="#!" class="btn-sideBar-SubMenu">
 					<i class="zmdi zmdi-case zmdi-hc-fw"></i> Administración <i class="zmdi zmdi-caret-down pull-right"></i>
 				</a>
@@ -54,7 +70,7 @@
 						<a href="<?php echo SERVERURL; ?>book/"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Nuevo libro</a>
 					</li>
 				</ul>
-			</li>
+			</li> -->
 			<li>
 				<a href="#!" class="btn-sideBar-SubMenu">
 					<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -68,11 +84,11 @@
 					</li> -->
 				</ul>
 			</li>
-			<li>
+			<!-- <li>
 				<a href="<?php echo SERVERURL; ?>catalog/">
 					<i class="zmdi zmdi-book-image zmdi-hc-fw"></i> Catalogo
 				</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </section>

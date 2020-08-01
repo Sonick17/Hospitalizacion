@@ -126,20 +126,37 @@
         }
 
         //CONTROLAR PARA PAGINAR ADMINISTRADORES
-        public function paginador_administrador_controlador($pagina,$registro,$privilegios,$codigo)
+        public function paginador_administrador_controlador($pagina,$registro,$privilegios,$codigo,$busqueda)
         {
             $pagina = mainModel::limpiar_Cadena($pagina);
             $registro = mainModel::limpiar_Cadena($registro);
             $privilegios = mainModel::limpiar_Cadena($privilegios);
             $codigo = mainModel::limpiar_Cadena($codigo);
+            $busqueda = mainModel::limpiar_Cadena($busqueda);
             $estado = 0;
             $tabla="";
 
             $pagina = (isset($pagina) && $pagina > 0 ) ? (int)$pagina : 1 ;
             $inicio = ($pagina > 0) ? (($pagina*$registro) - $registro ) : 0 ;
 
+
+            if(isset($busqueda) && $busqueda != "")
+            {
+                $consulta="SELECT   SQL_CALC_FOUND_ROWS * 
+                           FROM     usuario 
+                           WHERE    ((nombreCompleto LIKE '%$busqueda%') or (numIdentidad LIKE '%$busqueda%') or (email LIKE '%$busqueda%')) AND 
+                                    codUsuario != '$codigo' AND idRol != '1' AND Estado = '$estado' ORDER BY nombreCompleto ASC LIMIT $inicio,$registro" ;
+                
+                $paginaURL = "adminsearch";
+
+            }else
+            {
+                $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM usuario WHERE codUsuario != '$codigo' and idRol != '1' and Estado = '$estado' ORDER BY nombreCompleto ASC LIMIT $inicio,$registro ";
+                $paginaURL = "adminlist";
+            }
+            
             $conexion = mainModel::conectar();
-            $datos = $conexion->query(" SELECT SQL_CALC_FOUND_ROWS * FROM usuario WHERE codUsuario != '$codigo' and idRol != '1' and Estado = '$estado' ORDER BY nombreCompleto ASC LIMIT $inicio,$registro ");
+            $datos = $conexion->query($consulta);
 
             $datos = $datos->fetchAll();
             $total = $conexion->query("SELECT FOUND_ROWS()");
@@ -200,12 +217,12 @@
                         $tabla.=
                             '
                             <td>
-                                <a href="'.SERVERURL.'/myaccount/'.mainModel::encryption($codusu).'/" class="btn btn-success btn-raised btn-xs">
+                                <a href="'.SERVERURL.'myaccount/'.mainModel::encryption($codusu).'/" class="btn btn-success btn-raised btn-xs">
                                     <i class="zmdi zmdi-refresh"></i>
                                 </a>
                             </td>
                             <td>
-                                <a href="'.SERVERURL.'/mydata/'.mainModel::encryption($codusu).'/" class="btn btn-success btn-raised btn-xs">
+                                <a href="'.SERVERURL.'mydata/'.mainModel::encryption($codusu).'/" class="btn btn-success btn-raised btn-xs">
                                     <i class="zmdi zmdi-refresh"></i>
                                 </a>
                             </td>
@@ -249,7 +266,7 @@
                     $tabla.='
                             <tr>
                                 <td colspan ="5">
-                                    <a href="'.SERVERURL.'adminlist/" class="btn-sm btn-info btn-raised">Haga click aquí para recargar el listado</a>
+                                    <a href="'.SERVERURL.$paginaURL.'/" class="btn-sm btn-info btn-raised">Haga click aquí para recargar el listado</a>
                                 </td>
                             </tr>
                     '; 
@@ -283,19 +300,19 @@
                     ';
                 }else{
                     $tabla.='
-                            <li><a href="'.SERVERURL.'adminlist/'.($pagina-1).'/"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                            <li><a href="'.SERVERURL.$paginaURL.'/'.($pagina-1).'/"><i class="zmdi zmdi-chevron-left"></i></a></li>
                     ';
                 }
 
                 for($i = 1; $i <= $Npaginas; $i++){
                     if($pagina == $i){
                         $tabla.='
-                           <li class="active"><a href="'.SERVERURL.'adminlist/'.$i.'/">'.$i.'</a></li>
+                           <li class="active"><a href="'.SERVERURL.$paginaURL.'/'.$i.'/">'.$i.'</a></li>
                         ';
                     }
                     else{
                         $tabla.='
-                            <li><a href="'.SERVERURL.'adminlist/'.$i.'/">'.$i.'</a></li>
+                            <li><a href="'.SERVERURL.$paginaURL.'/'.$i.'/">'.$i.'</a></li>
                         ';
                     }
                 }
@@ -307,7 +324,7 @@
                     ';
                 }else{
                     $tabla.='
-                            <li><a href="'.SERVERURL.'adminlist/'.($pagina+ 1).'/"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            <li><a href="'.SERVERURL.$paginaURL.'/'.($pagina+ 1).'/"><i class="zmdi zmdi-chevron-right"></i></a></li>
                     ';
                 }
 
@@ -391,6 +408,22 @@
         }
 
 
+        public function datos_admininstrador_controlador($tipo, $codigo)
+        {
+            $codigo = mainModel::desctyption($codigo);
+            $tipo = mainModel::limpiar_Cadena($tipo);
+
+            return administradorModelo::datos_admininstrador_modelo($tipo, $codigo);
+        }
+
+        public function actualizar_cuenta_controlar()
+        {
+            $dni = mainModel::limpiar_Cadena($_POST['dni-up']);
+            $nombre = mainModel::limpiar_Cadena($_POST['nombre-up']);
+            $apellido = mainModel::limpiar_Cadena($_POST['apellido-up']);
+            $telefono = mainModel::limpiar_Cadena($_POST['telefono-up']);
+            $direccion = mainModel::limpiar_Cadena($_POST['direccion-reg']);
+        }
     }
 
     

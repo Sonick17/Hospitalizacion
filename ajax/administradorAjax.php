@@ -15,6 +15,10 @@
             echo $insAdmin->eliminar_cuenta_controlador();
         }
 
+        if( isset($_POST['dni-up']) && isset($_POST['nombre-up'])  ){
+            echo $insAdmin->eliminar_cuenta_controlador();
+        }
+
     }else{
         session_start();
         session_destroy();
